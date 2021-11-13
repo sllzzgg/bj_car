@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yydd.bj_car.dao.MapDataDao">
+
+    <select id="getList" resultType="com.yydd.bj_car.entity.MapData">
+       select
+            `name`
+            ,lng
+            ,lat
+            ,aa
+            ,`time`
+            ,`href`
+        from car_id
+
+     </select>
+</mapper>

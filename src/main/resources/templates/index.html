@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>点标记添加点击事件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+        body,
+        html,
+        #container {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=GVVwjSiMwTRbTWyPmADMZchsbFCf2n3d"></script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>
+<script type="text/javascript" src="/jquery-3.5.1.min.js"></script>
+<script>
+    var map = new BMapGL.Map('container');
+
+    map.centerAndZoom(new BMapGL.Point(116.404, 39.915), 12); // 初始化地图,设置中心点坐标和地图级别
+
+    map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
+
+    $.ajax({
+        url:"/mapData",
+        type:"post",
+
+        success:function(result){
+            list = result.list;
+
+            console.log(list.length)
+
+            list.forEach(function(ele,index){
+                var lng = ele.lng;
+                var lat = ele.lat;
+                var name = ele.name;
+
+                var point = new BMapGL.Point(lng,lat);
+                var marker = new BMapGL.Marker(point);
+                map.addOverlay(marker);
+
+
+                //地址信息
+                var infoWindow = new BMapGL.InfoWindow(name);
+
+                // 点标记添加点击事件
+                marker.addEventListener('click', function () {
+                    map.openInfoWindow(infoWindow, point); // 开启信息窗口
+                });
+            })
+        }
+    });
+
+</script>
