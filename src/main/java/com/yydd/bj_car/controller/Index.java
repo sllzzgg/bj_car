@@ -17,10 +17,10 @@ import java.util.Map;
 @Controller
 public class Index {
 
-    @RequestMapping("/index")
+    @RequestMapping({"/index","/"})
     public String indexPage(){
 
-        return "Index";
+        return "index";
     }
 
 }
