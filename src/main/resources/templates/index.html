@@ -19,7 +19,7 @@
             position: fixed;
             top: 10px;
             left: 20px;
-            width: 470px;
+            /*width: 470px;*/
             background: #fff;
             box-shadow: 0 2px 6px 0 rgba(27, 142, 236, 0.5);
             border-radius: 7px;
@@ -27,15 +27,16 @@
         }
         #result input{
             width:130px;
-            margin-right:10px;
+            /*margin-right:10px;*/
             height:25px;
             border: 1px solid rgba(27, 142, 236, 0.5);
             border-radius: 5px;
         }
         #result button{
             border: 1px solid rgba(27, 142, 236, 0.5);
-            border-radius: 5px;
+            /*border-radius: 5px;*/
             background: rgba(27, 142, 236, 0.5);
+            margin-top: 50%;
         }
     </style>
     <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=GVVwjSiMwTRbTWyPmADMZchsbFCf2n3d"></script>
@@ -44,10 +45,14 @@
     <div id="container"></div>
 
     <div id='result'>
-        出发地: <input id="begin" type="text"/>
-        目的地: <input id="end" type="text"/>
-        <button onclick="theLocation()"/>查询</button>
+        <div style="float: left;">
+            <div>出发地: <input id="begin" type="text"/></div>
+            <div>目的地: <input id="end" type="text"/></div>
+        </div>
+
+        <div style="float: right; margin-left: 5px;"><button onclick="theLocation()"/>查询</button></div>
     </div>
+
 </body>
 </html>
 <script type="text/javascript" src="/jquery-3.5.1.min.js"></script>
@@ -64,8 +69,6 @@
 
         success:function(result){
             list = result.list;
-
-            console.log(list.length)
 
             list.forEach(function(ele,index){
                 var lng = ele.lng;
@@ -91,8 +94,6 @@
         }
     });
 
-    var myGeo = new BMapGL.Geocoder();
-
     //解析地址&规划路线
     function theLocation(){
 
@@ -108,21 +109,29 @@
             data: {"beginAdress":begin, "endAdress":end},
             success:function(result){
 
-                var begin = JSON.parse(result.begin)
-                var end = JSON.parse(result.end)
+                if (result){
+                    var begin = JSON.parse(result.begin)
+                    var end = JSON.parse(result.end)
 
+                    if (begin.status === 1){
+                        alert("出发地没有找到！请输完整一些")
+                        return;
+                    }
 
-                var beginLocation = begin.result.location
-                var endLocation = end.result.location
+                    if (end.status === 1){
+                        alert("目的地没有找到！请输完整一些")
+                        return;
+                    }
 
-                var beginPoint = new BMapGL.Point(beginLocation.lng, beginLocation.lat)
-                var endPoint = new BMapGL.Point(endLocation.lng, endLocation.lat)
+                    var beginLocation = begin.result.location
+                    var endLocation = end.result.location
+                    var beginPoint = new BMapGL.Point(beginLocation.lng, beginLocation.lat)
+                    var endPoint = new BMapGL.Point(endLocation.lng, endLocation.lat)
 
-
-                //路线推荐
-                var driving = new BMapGL.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true }});
-                driving.search(beginPoint, endPoint);
-
+                    //路线推荐
+                    var driving = new BMapGL.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true }});
+                    driving.search(beginPoint, endPoint);
+                }
             }
         });
     }

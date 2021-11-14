@@ -3,6 +3,7 @@ package com.yydd.bj_car.controller;
 import com.yydd.bj_car.entity.ResponseData;
 import com.yydd.bj_car.service.MapDataService;
 import com.yydd.bj_car.utils.HttpUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -57,6 +58,11 @@ public class MapDataController {
     @ResponseBody
     @RequestMapping("/getAdress")
     public Map<String, Object> getAdress(String beginAdress, String endAdress){
+
+
+        if(StringUtils.isBlank(beginAdress) || StringUtils.isBlank(endAdress)){
+            return null;
+        }
 
         String begin = HttpUtil.sendGet(beginAdress);
         String end = HttpUtil.sendGet(endAdress);
