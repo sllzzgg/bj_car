@@ -4,12 +4,6 @@ import com.yydd.bj_car.entity.ResponseData;
 import com.yydd.bj_car.service.MapDataService;
 import com.yydd.bj_car.utils.HttpUtil;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -17,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,7 +22,7 @@ import java.util.Map;
 @Controller
 public class MapDataController {
 
-    Logger logger = LogManager.getLogger();
+    Logger logger = LogManager.getLogger(this.getClass());
 
     @Resource
     private MapDataService mapDataService;
@@ -46,9 +38,9 @@ public class MapDataController {
 
         Map<String, Object> queryMap = new HashMap<>();
 
-        ResponseData response = mapDataService.getMapData(queryMap);
+        logger.info("访问地图");
 
-        return response;
+        return mapDataService.getMapData(queryMap);
     }
 
     /**

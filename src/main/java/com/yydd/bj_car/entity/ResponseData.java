@@ -8,11 +8,14 @@ import java.util.List;
  * @author: zhangjj
  * @createDate: 2021/10/24
  */
-public class ResponseData<T> {
+public class ResponseData {
 
     private String code;
     private String msg;
-    private List<T> list;
+    private Object list;
+
+    private Integer status;
+
 
     public String getCode() {
         return code;
@@ -30,20 +33,19 @@ public class ResponseData<T> {
         this.msg = msg;
     }
 
-    public List<T> getList() {
+    public Object getList() {
         return list;
     }
 
-    public void setList(List<T> list) {
+    public void setList(Object list) {
         this.list = list;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseData{" +
-                "code='" + code + '\'' +
-                ", msg='" + msg + '\'' +
-                ", list=" + list +
-                '}';
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
