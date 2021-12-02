@@ -14,7 +14,7 @@ public class ResponseData {
     private String msg;
     private Object list;
 
-    private Integer status;
+    private Integer status = 1;
 
 
     public String getCode() {
