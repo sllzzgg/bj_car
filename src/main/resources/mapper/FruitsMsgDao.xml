@@ -8,6 +8,6 @@
             title
             ,text_name textName
         from fruits
-        limit 100
+        where id = #{param.page} + 2
      </select>
 </mapper>

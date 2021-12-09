@@ -16,7 +16,7 @@ public class Fruits {
     }
 
     public String getTitle() {
-        return title;
+        return title.replace("\\\"","").replace("n","").replace("\\","").replace(".jpg/",".jpg");
     }
 
     public void setTitle(String title) {
@@ -24,7 +24,7 @@ public class Fruits {
     }
 
     public String getTextName() {
-        return textName;
+        return textName.replace("\\\"","").replace("n","").replace("\\","").replace(".jpg/",".jpg");
     }
 
     public void setTextName(String textName) {
