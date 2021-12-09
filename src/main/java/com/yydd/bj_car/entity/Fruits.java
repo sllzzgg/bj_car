@@ -24,7 +24,13 @@ public class Fruits {
     }
 
     public String getTextName() {
-        return textName.replace("\\\"","").replace("n","").replace("\\","").replace(".jpg/",".jpg");
+        return textName
+                .replace("\\\"","")
+                .replace("n","")
+                .replace("\\","")
+                .replace(".jpg/",".jpg")
+                .replace("src=/static","src=https://www.sgzmt.com/static")
+                .replace(".pg",".jpg");
     }
 
     public void setTextName(String textName) {

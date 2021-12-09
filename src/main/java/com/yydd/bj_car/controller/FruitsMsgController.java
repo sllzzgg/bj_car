@@ -22,7 +22,8 @@ public class FruitsMsgController {
     @RequestMapping("/fruits/list")
     public ResponseData getFruitData(@RequestBody Map<String, Object> queryMap){
 
-        return fruitsMsgService.getList(queryMap);
+        ResponseData res = fruitsMsgService.getList(queryMap);
+        return res;
     }
 
 }
